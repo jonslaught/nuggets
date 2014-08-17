@@ -2,7 +2,7 @@
 
 reset = ->
   Posts.remove({})
-  Grafs.remove({})
+  #Grafs.remove({})
 
 Meteor.startup ->
 
@@ -17,11 +17,11 @@ Meteor.startup ->
       grafs: []
       date: post.date
 
+    p = Post.create postData
+
     for graf in post.grafs
       grafData =
         text: graf.text
         quote: graf.quote
-      grafId = Grafs.insert grafData
-      postData.grafs.push(grafId)
-
-    Posts.insert postData
+      
+      p.addGraf(grafData)
