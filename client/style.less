@@ -40,13 +40,29 @@ a {
   margin: @spacer-thin 0 @spacer-thin 0;
   padding-top: @spacer;
   padding-bottom: @spacer;
+  position: relative;
   
+
+}
+
+.graf--body {
   &.quote {
     border-left: 10px solid @yellow;
     padding-left: @spacer + 10px;
   }
+}
 
 
+.graf:hover .graf--buttons {
+  visibility: visible;
+}
+
+.graf--buttons {
+  position: absolute;
+  right: -100px - @spacer;
+  width: 100px;
+  visibility: hidden;
+  font-family: @sans;
 }
 
 // Blog
@@ -75,10 +91,11 @@ a {
       font-weight: bold;
     }
 
-  .outside {
-    position: absolute;
-    left: -50px;
-  }
+}
+
+.outside {
+  position: absolute;
+  left: -50px;
 }
 
 .post--body {

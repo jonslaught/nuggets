@@ -2,6 +2,13 @@
 
   <h1 class="blog--title">Jon's Blog</h1>
 
+  <form class="blog--new input-group input-group-lg">
+     <input type="text" class="blog--new--link form-control">
+     <span class="input-group-btn">
+      <button class="btn btn-primary"><i class="fa fa-magic"></i></button>
+    </span>
+  </form>
+
   {{#each posts}}
     {{> post}}
   {{/each}}
@@ -46,7 +53,27 @@
 </template>
 
 <template name="graf">
-  <div class="graf {{#if quote}}quote{{/if}}" contentEditable="true">
-    {{! text }}
+  <div class="graf">
+
+    {{!
+    <div class="graf--handle outside">
+      <i class="fa fa-circle-o"></i>
+    </div>
+    }}
+
+    {{!
+    <div class="graf--buttons">
+      <i class="fa fa-star-o"></i> 3
+      <br />
+      <i class="fa fa-comments-o"></i> 15
+      <br />
+      <i class="fa fa-retweet"></i> 6
+    </div>
+    }}
+
+    <div class="graf--body {{#if quote}}quote{{/if}}" contentEditable="true">
+      {{! text }}
+    </div>
+
   </div>
 </template>

@@ -1,29 +1,34 @@
 
 Template.graf.rendered = ->
   if not @data.text
-    @find('.graf').focus()
+    @find('.graf--body').focus()
 
   Deps.autorun =>
-    @$('.graf').html(@data.text) # hacky workaround for blaze bug
+    @$('.graf--body').html(@data.text) # hacky workaround for blaze bug
 
 Template.post.rendered = ->
-  @$('.post--body').sortable()
+  
+  ###
+  @$('.post--body').sortable
+    handle: '.graf--handle'
+  ###
 
 Template.post.events
   'click .post--adder': ->
     @addGraf()
 
 Template.graf.events
-  'blur .graf': (event, template) ->
+
+  'blur .graf--body': (event, template) ->
     post = Posts.findOne(@postId)
-    grafNode = template.$('.graf')
+    grafNode = template.$('.graf--body')
     if grafNode.text().trim()
       post.updateGraf(@_id, {text: grafNode.html()})
     else
       post.removeGraf(@_id)
 
-  'keydown .graf': (event, template) ->
-    grafNode = template.$('.graf')
+  'keydown .graf--body': (event, template) ->
+    grafNode = template.$('.graf--body')
     key = event.which
     shift = event.shiftKey
     ctrl = event.metaKey
