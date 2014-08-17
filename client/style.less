@@ -32,7 +32,7 @@ a {
 }
 
 .container {
-  width: 600px;
+  max-width: 600px;
 }
 
 .graf {
@@ -60,9 +60,14 @@ a {
 
 // Post
 
+.post {
+  margin: @spacer-xl 0 @spacer-xl 0;
+}
+
 .post--title {
   font-size: @large;
   position: relative;
+  line-height: 1;
 
   a { 
       color: black; 
@@ -77,13 +82,21 @@ a {
 }
 
 .post--body {
-  margin: @spacer-fat 0 @spacer 0;
   font-size: @medium;
 }
 
 .post--adder {
   font-size: @large;
   color: @muted;
+}
+
+.post--link {
+
+  a {
+    color: @link;
+    text-decoration: none; 
+  }
+  
 }
 
 // Font styles 

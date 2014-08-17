@@ -5,34 +5,44 @@
   {{#each posts}}
     {{> post}}
   {{/each}}
+
+
+
 </template>
 
 <template name="post">
-  <h2 class="post--title">
+  <div class="post">
+
+    <div class="post--title">
+      {{#if link}}
+        <i class="fa fa-chain outside"></i>
+        <a href="{{ link }}" target="_blank">{{ title }}</a>
+      {{else}}
+        <i class="fa fa-pencil outside"></i>
+        <a href="#">{{ title }}</a>
+      {{/if}}
+    </div>
 
     {{#if link}}
-      <i class="fa fa-chain outside"></i>
-      <a href="{{ link }}" target="_blank">{{ title }}</a>
-    {{else}}
-      <i class="fa fa-pencil outside"></i>
-      <a href="#">{{ title }}</a>
-    {{/if}}
-
-  </h2>
-  <span class="post--byline muted">by {{ author }} - Posted {{formatDate date "MMMM Do YYYY"}}</span>
-
-  <div class="post--body">
-    
-    {{ #each grafs }}
-      {{>graf}}
-    {{/each}}
-  </div>
-
-  <div class="post--adder">
-
-      <i class="fa fa-plus-circle"></i>
-
+    <div class="post--link">
+      <a href="{{link}}" class="muted">{{link}}</a>
     </div>
+    {{/if}}
+    
+    <div class="post--byline muted">
+      by {{ author }} - Posted {{formatDate date "MMMM Do YYYY"}}
+    </div>
+
+    <div class="post--body">
+      {{ #each grafs }}
+        {{>graf}}
+      {{/each}}
+    </div>
+
+    <div class="post--adder">
+      <i class="fa fa-plus-circle"></i>
+    </div>
+  </div>
 </template>
 
 <template name="graf">
