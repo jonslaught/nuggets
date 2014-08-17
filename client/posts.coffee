@@ -20,6 +20,7 @@ Template.graf.events
       post.removeGraf(@_id)
 
   'keydown .graf': (event, template) ->
+    grafNode = template.$('.graf')
     key = event.which
     shift = event.shiftKey
     ctrl = event.metaKey
@@ -33,3 +34,19 @@ Template.graf.events
       event.preventDefault()
       return false
 
+    # Indent
+    if key == 9
+      post = Posts.findOne(@postId)
+      change = if shift then {quote: false} else {quote: true}
+      post.updateGraf(@_id, change)
+      event.preventDefault()
+      return false
+
+    # Backspace
+    if key == 8
+      post = Posts.findOne(@postId)
+      empty = not grafNode.text().trim()
+      if empty and @quote
+        post.updateGraf(@_id, {quote: false})
+      else if empty
+        post.removeGraf(@_id)
