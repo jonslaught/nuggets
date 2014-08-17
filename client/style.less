@@ -3,15 +3,19 @@
 @small: 12pt;
 @medium: 14pt;
 @large: 30pt;
+@extra-large: 90pt;
 
 @muted: #999;
 @yellow: #FFEDCC;
 
 @serif: 'Lora';
 @sans: 'Ek Mukta';
+@blocky: 'Alegreya Sans SC';
 
+@spacer-xl: 50px;
 @spacer-fat: 25px;
-@spacer-thin: 10px;
+@spacer: 10px;
+@spacer-thin: 5px;
 
 body {
   color: @base;
@@ -32,29 +36,39 @@ a {
 }
 
 .graf {
+  //margin: @spacer-thin 0 @spacer-thin 0;
   margin: @spacer-thin 0 @spacer-thin 0;
-  padding-top: @spacer-thin;
-  padding-bottom: @spacer-thin;
+  padding-top: @spacer;
+  padding-bottom: @spacer;
   
-
   &.quote {
     border-left: 10px solid @yellow;
-    padding-left: @spacer-thin + 10px;
+    padding-left: @spacer + 10px;
   }
 
 
+}
+
+// Blog
+
+.blog--title {
+  font-size: @extra-large;
+  font-weight: bold;
+  font-family: @blocky;
+  margin: @spacer-xl 0 @spacer-xl 0;
 }
 
 // Post
 
 .post--title {
   font-size: @large;
-  a { 
-    color: black; 
-    text-decoration: none;
-    font-weight: bold;
-  }
   position: relative;
+
+  a { 
+      color: black; 
+      text-decoration: none;
+      font-weight: bold;
+    }
 
   .outside {
     position: absolute;
@@ -63,12 +77,13 @@ a {
 }
 
 .post--body {
-  margin: @spacer-fat 0 @spacer-fat 0;
+  margin: @spacer-fat 0 @spacer 0;
   font-size: @medium;
 }
 
-.post--byline {
-
+.post--adder {
+  font-size: @large;
+  color: @muted;
 }
 
 // Font styles 
