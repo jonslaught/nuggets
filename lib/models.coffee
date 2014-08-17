@@ -7,6 +7,9 @@ class @Post
     _.extend(@, doc)
 
   @create: (data) ->
+    data ?= {}
+    data.grafs ?= []
+
     p = Posts.insert(data)
     Posts.findOne(p)
 

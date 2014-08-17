@@ -22,5 +22,5 @@ if Meteor.isServer
           domain: data.domain
 
       log postData
-      Posts.insert postData
+      Post.create postData
 
