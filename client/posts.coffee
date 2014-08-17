@@ -7,8 +7,7 @@ Template.graf.rendered = ->
     @find('.graf').focus()
 
 Template.post.events
-  'click .post--adder': (event, template) ->
-    
+  'click .post--adder': ->
     
     g = Grafs.insert({})
     Posts.update @_id,
@@ -16,3 +15,10 @@ Template.post.events
         grafs:
           g
     
+Template.graf.events
+  'blur .graf': (event, template) ->
+
+    log 'saving', @_id, @text
+    Grafs.update @_id,
+      $set:
+        text: template.$('.graf').html()
