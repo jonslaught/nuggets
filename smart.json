@@ -1,0 +1,8 @@
+{
+  "packages": {
+    "lodash": {},
+    "iron-router": {},
+    "bootstrap-3": {},
+    "moment": {}
+  }
+}

@@ -1,0 +1,27 @@
+<template name="posts">
+  {{#each posts}}
+    {{> post}}
+  {{/each}}
+</template>
+
+<template name="post">
+  <h2 class="post--title">
+
+    {{#if link}}
+      <i class="fa fa-chain outside"></i>
+      <a href="{{ link }}">{{ title }}</a>
+    {{else}}
+      <i class="fa fa-pencil outside"></i>
+      <a href="#">{{ title }}</a>
+    {{/if}}
+
+  </h2>
+  <span class="post--byline muted">by {{ author }} - Posted {{formatDate date "MMMM Do YYYY"}}</span>
+  <div class="post--body">
+    {{ #each grafs }}
+    <div class="graf {{#if quote}}quote{{/if}}">
+      {{{ text }}}
+    </div>
+    {{/each}}
+  </div>
+</template>

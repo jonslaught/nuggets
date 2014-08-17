@@ -1,0 +1,79 @@
+@base: #000;
+@link: #0044bb;
+@small: 12pt;
+@medium: 14pt;
+@large: 30pt;
+
+@muted: #999;
+@yellow: #FFEDCC;
+
+@serif: 'Lora';
+@sans: 'Ek Mukta';
+
+@spacer-fat: 25px;
+@spacer-thin: 10px;
+
+body {
+  color: @base;
+  font-size: @medium;
+  font-family: @serif;
+
+
+  margin: 0px;
+}
+
+a {
+  color: black;
+  text-decoration: underline;
+}
+
+.container {
+  width: 600px;
+}
+
+.graf {
+  margin: @spacer-thin 0 @spacer-thin 0;
+  padding-top: @spacer-thin;
+  padding-bottom: @spacer-thin;
+  
+
+  &.quote {
+    border-left: 10px solid @yellow;
+    padding-left: @spacer-thin + 10px;
+  }
+
+
+}
+
+// Post
+
+.post--title {
+  font-size: @large;
+  a { 
+    color: black; 
+    text-decoration: none;
+    font-weight: bold;
+  }
+  position: relative;
+
+  .outside {
+    position: absolute;
+    left: -50px;
+  }
+}
+
+.post--body {
+  margin: @spacer-fat 0 @spacer-fat 0;
+  font-size: @medium;
+}
+
+.post--byline {
+
+}
+
+// Font styles 
+
+.muted {
+  color: @muted;
+  font-size: @small;
+}
