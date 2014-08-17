@@ -3,6 +3,8 @@
     "lodash": {},
     "iron-router": {},
     "bootstrap-3": {},
-    "moment": {}
+    "moment": {},
+    "jquery-ui": {},
+    "jquery-ui-bootstrap": {}
   }
 }

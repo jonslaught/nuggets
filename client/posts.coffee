@@ -6,6 +6,9 @@ Template.graf.rendered = ->
   Deps.autorun =>
     @$('.graf').html(@data.text) # hacky workaround for blaze bug
 
+Template.post.rendered = ->
+  @$('.post--body').sortable()
+
 Template.post.events
   'click .post--adder': ->
     @addGraf()
