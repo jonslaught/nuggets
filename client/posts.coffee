@@ -19,7 +19,6 @@ Template.graf.events
     else
       post.removeGraf(@_id)
 
-
   'keydown .graf': (event, template) ->
     key = event.which
     shift = event.shiftKey

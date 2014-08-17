@@ -10,17 +10,23 @@ class @Post
     p = Posts.insert(data)
     Posts.findOne(p)
 
-  addGraf: (graf) ->
-    
+  createGraf: (graf) ->
     graf ?= {}
     graf.text ?= ""
     graf._id = Random.id()
     graf.postId = @_id # pointer if needed
+    return graf
+
+  addGraf: (graf) ->
+    graf = @createGraf(graf)
     @grafs.push(graf)
     @save()
 
   addGrafAfter: (afterId, graf) ->
-    @addGraf(graf)
+    graf = @createGraf(graf)
+    afterIndex = _.findIndex(@grafs, (g) -> g._id == afterId)
+    @grafs = _.first(@grafs, afterIndex + 1).concat(graf).concat(_.rest(@grafs, afterIndex + 1))
+    @save()
 
   updateGraf: (id, changes) ->
     @grafs = _.map @grafs, (graf) ->
