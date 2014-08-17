@@ -5,6 +5,7 @@
     "bootstrap-3": {},
     "moment": {},
     "jquery-ui": {},
-    "jquery-ui-bootstrap": {}
+    "jquery-ui-bootstrap": {},
+    "npm": {}
   }
 }

@@ -1,6 +1,6 @@
 Router.map ->
   
-  this.route 'posts',
+  this.route 'blog',
     path: '/'
     data: {posts: Posts.find()}
 

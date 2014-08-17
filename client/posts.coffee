@@ -13,6 +13,21 @@ Template.post.rendered = ->
     handle: '.graf--handle'
   ###
 
+
+Template.blog.events
+  'submit .blog--new': (event, template) ->
+
+    link = template.$('.blog--new--link').val()
+    Session.set('fetching', true)
+
+    onFetched = ->
+      Session.set('fetching', false)
+
+    Meteor.call('fetchLink', link, onFetched)
+
+    event.preventDefault()
+    return false
+
 Template.post.events
   'click .post--adder': ->
     @addGraf()
