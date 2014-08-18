@@ -3,19 +3,8 @@ Template.graf.rendered = ->
   if not @data.text
     @find('.graf--body').focus()
 
-  Deps.autorun =>
-    post = Posts.findOne(@data.postId) # force reactivity. this sucks :(
-    graf = _.find(post.grafs, {_id: @data._id})
-    html = htmlify(graf.text)
-    @$('.graf--body').html(html) # hacky workaround for blaze bug
-
-Template.post.rendered = ->
-  
-  ###
-  @$('.post--body').sortable
-    handle: '.graf--handle'
-  ###
-
+  html = htmlify(@data.text)
+  @$('.graf--body').html(html) # hacky workaround for blaze bug
 
 Template.blog.events
   'submit .blog--new': (event, template) ->
@@ -44,6 +33,8 @@ Template.graf.events
     md = markdownify(html)
     if grafNode.text().trim()
       post.updateGraf(@_id, {text: md})
+      html = htmlify(md)
+      grafNode.html(html) # this should be reactive but blaze is busted
     else
       post.removeGraf(@_id)
 
