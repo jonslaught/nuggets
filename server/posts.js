@@ -10,7 +10,7 @@ mockPosts = [
         "quote": true
       },
       {
-        "text": "As you explore the extended Minecraft-verse online, you start to get the same oceanic feeling that huge internet systems like YouTube and Twitter often inspire: the mingling of despair (&ldquo;I&rsquo;ll never see it all&rdquo;) with delight (&ldquo;People made this&rdquo;) with dizzying anthropic awe (&ldquo;So&hellip; many&hellip; people.&rdquo;)",
+        "text": "As you explore the extended Minecraft-verse online, you start to get the same oceanic feeling that huge internet systems like YouTube and Twitter often inspire:<p>the mingling of despair (&ldquo;I&rsquo;ll never see it all&rdquo;) with<p> delight (&ldquo;People made this&rdquo;) with dizzying anthropic awe (&ldquo;So&hellip; many&hellip; people.&rdquo;)",
         "quote": true
       },
       {

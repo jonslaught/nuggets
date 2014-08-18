@@ -40,7 +40,13 @@ a {
   position: relative;
   
   p {
-    padding: @spacer 0 @spacer 0;
+    padding: 0px;
+  }
+  p:first-child {
+    padding-top: @spacer;
+  }
+  p:last-child {
+    padding-bottom: @spacer;
   }
 
 }
