@@ -25,12 +25,20 @@ UI.registerHelper "formatDate", (date, format) ->
 
 if Meteor.isClient
 
-  md = new reMarked()
-  @markdownify = md.render
-  @htmlify = (new Showdown.converter()).makeHtml
+  remarked = new reMarked()
+  @markdownify = (html) ->
+    md = remarked.render(html)
+    md = md.replace(/<(?:.|\n)*?>/gm, '')
+    return md
+
+  showdown = new Showdown.converter()
+  @htmlify = (md) ->
+    html = showdown.makeHtml(md)
+    
 
 if Meteor.isServer
 
-  md = Meteor.require('html-md')
+  html_md = Meteor.require('html-md')
   @markdownify = (html) ->
-    md(html, {inline: true})
+    md = html_md(html, {inline: true})
+    md.replace(/<(?:.|\n)*?>/gm, '')

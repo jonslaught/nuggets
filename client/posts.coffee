@@ -4,7 +4,9 @@ Template.graf.rendered = ->
     @find('.graf--body').focus()
 
   Deps.autorun =>
-    html = htmlify(@data.text)
+    post = Posts.findOne(@data.postId) # force reactivity. this sucks :(
+    graf = _.find(post.grafs, {_id: @data._id})
+    html = htmlify(graf.text)
     @$('.graf--body').html(html) # hacky workaround for blaze bug
 
 Template.post.rendered = ->
@@ -40,7 +42,6 @@ Template.graf.events
     grafNode = template.$('.graf--body')
     html = grafNode.html()
     md = markdownify(html)
-
     if grafNode.text().trim()
       post.updateGraf(@_id, {text: md})
     else
