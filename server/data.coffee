@@ -21,7 +21,7 @@ Meteor.startup ->
 
     for graf in post.grafs
       grafData =
-        text: graf.text
+        text: markdownify(graf.text)
         quote: graf.quote
       
       p.addGraf(grafData)

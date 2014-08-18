@@ -21,3 +21,16 @@ UI.registerHelper "formatDate", (date, format) ->
     date = moment(date)
     date.lang('en')
     date.format(format)
+
+
+if Meteor.isClient
+
+  md = new reMarked()
+  @markdownify = md.render
+  @htmlify = (new Showdown.converter()).makeHtml
+
+if Meteor.isServer
+
+  md = Meteor.require('html-md')
+  @markdownify = (html) ->
+    md(html, {inline: true})

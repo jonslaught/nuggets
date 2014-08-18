@@ -4,7 +4,8 @@ Template.graf.rendered = ->
     @find('.graf--body').focus()
 
   Deps.autorun =>
-    @$('.graf--body').html(@data.text) # hacky workaround for blaze bug
+    html = htmlify(@data.text)
+    @$('.graf--body').html(html) # hacky workaround for blaze bug
 
 Template.post.rendered = ->
   
@@ -37,8 +38,11 @@ Template.graf.events
   'blur .graf--body': (event, template) ->
     post = Posts.findOne(@postId)
     grafNode = template.$('.graf--body')
+    html = grafNode.html()
+    md = markdownify(html)
+
     if grafNode.text().trim()
-      post.updateGraf(@_id, {text: grafNode.html()})
+      post.updateGraf(@_id, {text: md})
     else
       post.removeGraf(@_id)
 
