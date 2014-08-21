@@ -2,21 +2,36 @@
   transform: (doc) ->
     return new Post(doc)
 
+
+class @Graf
+  constructor: (doc) ->
+    _.extend(@, doc)
+    @_id ?= Random.id()
+    @text ?= ""
+
+  update: (modifier) ->
+    changes = modifier.$set # only set is supported for now
+    Posts.findOne(@postId).updateGraf(@_id, changes)
+
+  delete: ->
+    Posts.findOne(@postId).removeGraf(@_id)
+
 class @Post
   constructor: (doc) ->
     _.extend(@, doc)
+    @grafs ?= []
+
+    for graf, i in @grafs
+      @grafs[i] = new Graf(graf)
 
   @create: (data) ->
     data ?= {}
-    data.grafs ?= []
 
     p = Posts.insert(data)
     Posts.findOne(p)
 
   createGraf: (graf) ->
-    graf ?= {}
-    graf.text ?= ""
-    graf._id = Random.id()
+    graf = new Graf(graf)
     graf.postId = @_id # pointer if needed
     return graf
 
@@ -42,6 +57,10 @@ class @Post
   removeGraf: (id) ->
     _.remove @grafs, (graf) -> graf._id == id
     @save()
+
+
+  update: (modifier) ->
+    Posts.update @_id, modifier
 
   save: ->
     Posts.update @_id, @
