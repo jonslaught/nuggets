@@ -3,8 +3,10 @@ Template.graf.rendered = ->
   if not @data.text
     @find('.graf--body').focus()
 
+  ###
   html = htmlify(@data.text)
   @$('.graf--body').html(html) # hacky workaround for blaze bug
+  ###
 
 Template.blog.events
   'submit .blog--new': (event, template) ->
@@ -26,6 +28,7 @@ Template.post.events
 
 Template.graf.events
 
+  ###
   'blur .graf--body': (event, template) ->
     post = Posts.findOne(@postId)
     grafNode = template.$('.graf--body')
@@ -37,6 +40,7 @@ Template.graf.events
       grafNode.html(html) # this should be reactive but blaze is busted
     else
       post.removeGraf(@_id)
+  ###
 
   'keydown .graf--body': (event, template) ->
     grafNode = template.$('.graf--body')

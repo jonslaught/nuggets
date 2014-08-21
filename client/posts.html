@@ -21,13 +21,8 @@
   <div class="post">
 
     <div class="post--title">
-      {{#if link}}
-        <i class="fa fa-chain outside"></i>
-        <a href="{{ link }}" target="_blank" md-editable="title"></a>
-      {{else}}
-        <i class="fa fa-pencil outside"></i>
-        <a href="#">{{ title }}</a>
-      {{/if}}
+      <i class="fa fa-pencil outside"></i>
+      {{> editable model=this field="title" inline=true }}
     </div>
 
     {{#if link}}
@@ -37,7 +32,7 @@
     {{/if}}
     
     <div class="post--byline muted">
-      by {{ author }} - Posted {{formatDate date "MMMM Do YYYY"}}
+      by {{> editable model=this field="author" inline=true }} - Posted {{formatDate date "MMMM Do YYYY"}}
     </div>
 
     <div class="post--body">
@@ -71,9 +66,9 @@
     </div>
     }}
 
-    <div class="graf--body {{#if quote}}quote{{/if}}" contentEditable="true">
-      {{! text goes here (in .rendered) }}
-    </div>
+    <div class="graf--body {{#if quote}}quote{{/if}}">
+      {{> editable model=this field="text"}}
+    </div>    
 
   </div>
 </template>

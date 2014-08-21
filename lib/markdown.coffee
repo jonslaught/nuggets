@@ -5,11 +5,13 @@ if Meteor.isClient
   @markdownify = (html) ->
     md = remarked.render(html)
     md = md.replace(/<(?:.|\n)*?>/gm, '')
+
     return md
 
   showdown = new Showdown.converter()
   @htmlify = (md) ->
     html = showdown.makeHtml(md)
+    return html
     
 
 if Meteor.isServer
