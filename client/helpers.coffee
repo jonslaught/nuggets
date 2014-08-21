@@ -23,3 +23,5 @@ Template.editable.events =
       @model.update(modifier)
       html = htmlify(md)
       node.html(html)
+    else if @deleteIfBlank
+      @model.delete()

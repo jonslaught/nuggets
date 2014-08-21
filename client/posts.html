@@ -67,7 +67,7 @@
     }}
 
     <div class="graf--body {{#if quote}}quote{{/if}}">
-      {{> editable model=this field="text"}}
+      {{> editable model=this field="text" deleteIfBlank=true }}
     </div>    
 
   </div>

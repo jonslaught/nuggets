@@ -13,6 +13,9 @@ class @Graf
     changes = modifier.$set # only set is supported for now
     Posts.findOne(@postId).updateGraf(@_id, changes)
 
+  delete: ->
+    Posts.findOne(@postId).removeGraf(@_id)
+
 class @Post
   constructor: (doc) ->
     _.extend(@, doc)
