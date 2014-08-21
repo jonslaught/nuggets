@@ -1,7 +1,8 @@
+@Streams = new Meteor.Collection "streams"
+
 @Posts = new Meteor.Collection "posts",
   transform: (doc) ->
     return new Post(doc)
-
 
 class @Graf
   constructor: (doc) ->
@@ -16,19 +17,15 @@ class @Graf
   delete: ->
     Posts.findOne(@postId).removeGraf(@_id)
 
-class @Post
+class @Post extends Model
+
   constructor: (doc) ->
     _.extend(@, doc)
+    @_collection = Posts
     @grafs ?= []
 
     for graf, i in @grafs
       @grafs[i] = new Graf(graf)
-
-  @create: (data) ->
-    data ?= {}
-
-    p = Posts.insert(data)
-    Posts.findOne(p)
 
   createGraf: (graf) ->
     graf = new Graf(graf)
@@ -57,10 +54,3 @@ class @Post
   removeGraf: (id) ->
     _.remove @grafs, (graf) -> graf._id == id
     @save()
-
-
-  update: (modifier) ->
-    Posts.update @_id, modifier
-
-  save: ->
-    Posts.update @_id, @

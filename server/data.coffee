@@ -17,7 +17,7 @@ Meteor.startup ->
       grafs: []
       date: post.date
 
-    p = Post.create postData
+    p = Posts.create postData
 
     for graf in post.grafs
       grafData =
