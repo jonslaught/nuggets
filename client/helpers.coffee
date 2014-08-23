@@ -4,10 +4,12 @@ Template.editable.rendered = ->
 
   model = @data.model
   field = @data.field
-  value = model[field]
 
-  html = htmlify(value)
-  @$('.editable').html(html)
+  Deps.autorun =>
+    if model?
+      value = model[field]
+      html = htmlify(value)
+      @$('.editable').html(html)
 
 
 Template.editable.events =

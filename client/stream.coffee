@@ -1,7 +1,7 @@
-Template.blog.events
-  'submit .blog--new': (event, template) ->
+Template.stream.events
+  'submit .stream--new': (event, template) ->
 
-    link = template.$('.blog--new--link').val()
+    link = template.$('.stream--new--link').val()
     Session.set('fetching', true)
 
     onFetched = ->
@@ -12,15 +12,15 @@ Template.blog.events
     event.preventDefault()
     return false
 
-  'click .blog--download': ->
+  'click .stream--download': ->
     data = Posts.find().fetch()
     encoded = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2))
     $('<a href="data:' + encoded + '" download="posts.json">download JSON</a>')[0].click();
 
-  'mouseup .blog--upload': ->
-    $('.blog--upload--input').click()
+  'mouseup .stream--upload': ->
+    $('.stream--upload--input').click()
 
-  'change .blog--upload--input': (event) ->
+  'change .stream--upload--input': (event) ->
     reader = new FileReader()
     file = event.target.files[0]
     reader.onload = (e) ->

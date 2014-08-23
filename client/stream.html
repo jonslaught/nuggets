@@ -1,0 +1,20 @@
+<template name="stream">
+  <h1 class="stream--title">{{#if title }}{{> editable model=this field="title" }}{{/if}}</h1>
+  <form class="stream--new input-group input-group-lg">
+     <input type="text" class="stream--new--link form-control">
+     <span class="input-group-btn">
+      <button class="btn btn-primary"><i class="fa fa-magic"></i></button>
+    </span>
+  </form>
+
+  {{#each posts}}
+    {{> post}}
+  {{/each}}
+
+
+  <button class="btn btn-lg btn-default stream--download"><i class="fa fa-download"></i> Download JSON</button>
+  <button class="btn btn-lg btn-default stream--upload"><i class="fa fa-upload"></i> Upload JSON</button>
+  <input type="file" class="hidden stream--upload--input" />
+
+
+</template>

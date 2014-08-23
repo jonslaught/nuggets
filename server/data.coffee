@@ -2,11 +2,16 @@
 
 reset = ->
   Posts.remove({})
+  Streams.remove({})
   #Grafs.remove({})
 
 Meteor.startup ->
 
   reset()
+
+  stream = Streams.create
+    title: "Jon's Blog"
+    description: "A bunch of nuggets"
 
   for post in mockPosts
   
@@ -16,6 +21,7 @@ Meteor.startup ->
       link: post.link
       grafs: []
       date: post.date
+      streamId: stream._id
 
     p = Posts.create postData
 

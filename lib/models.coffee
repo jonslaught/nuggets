@@ -1,21 +1,23 @@
-@Streams = new Meteor.Collection "streams"
+@Streams = new Meteor.Collection "streams",
+  transform: (doc) ->
+    return new Stream(doc)
 
 @Posts = new Meteor.Collection "posts",
   transform: (doc) ->
     return new Post(doc)
 
-class @Graf
+class @Stream extends Model
+
   constructor: (doc) ->
     _.extend(@, doc)
-    @_id ?= Random.id()
-    @text ?= ""
+    @_collection = Streams
 
-  update: (modifier) ->
-    changes = modifier.$set # only set is supported for now
-    Posts.findOne(@postId).updateGraf(@_id, changes)
-
-  delete: ->
-    Posts.findOne(@postId).removeGraf(@_id)
+if Meteor.isServer
+  Meteor.publish 'streams', ->
+    return [
+      Streams.find({}),
+      Posts.find({})
+    ]
 
 class @Post extends Model
 
@@ -54,3 +56,17 @@ class @Post extends Model
   removeGraf: (id) ->
     _.remove @grafs, (graf) -> graf._id == id
     @save()
+
+
+class @Graf
+  constructor: (doc) ->
+    _.extend(@, doc)
+    @_id ?= Random.id()
+    @text ?= ""
+
+  update: (modifier) ->
+    changes = modifier.$set # only set is supported for now
+    Posts.findOne(@postId).updateGraf(@_id, changes)
+
+  delete: ->
+    Posts.findOne(@postId).removeGraf(@_id)
