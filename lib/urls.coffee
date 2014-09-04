@@ -12,5 +12,13 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe('streams')
 
+  this.route 'instapaper',
+    path: '/instapaper'
+    where: 'server'
+    action: ->
+      Instapaper.getToken()
+
+
+
 Router.configure
   layoutTemplate: 'master'

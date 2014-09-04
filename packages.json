@@ -2,5 +2,6 @@
   "cheerio": "0.15.0",
   "readability-api": "0.4.0",
   "html-md": "3.0.2",
-  "marked": "0.3.2"
+  "marked": "0.3.2",
+  "oauth-1.0a": "0.1.1"
 }
