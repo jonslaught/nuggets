@@ -12,14 +12,13 @@ Meteor.startup ->
 
 loadInstapaperData = ->
 
-  I = setupInstapaper()
   stream = Streams.create
     slug: "instapaper"
     title: "Jon's Instapaper"
     description: "Freshly exported"
 
   # Get all starred posts
-  response = I.call('bookmarks/list', {'folder_id': 'starred'})
+  response = Instapaper.call('bookmarks/list', {'folder_id': 'starred'})
   highlights = response.highlights
   bookmarks = response.bookmarks
 

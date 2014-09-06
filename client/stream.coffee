@@ -1,15 +1,22 @@
+Template.stream.fetching = ->
+  Session.get('fetching')
+
 Template.stream.events
   'submit .stream--new': (event, template) ->
+    event.preventDefault()
 
     link = template.$('.stream--new--link').val()
+    $('.stream--new--button').blur()
     Session.set('fetching', true)
 
-    onFetched = ->
+    Meteor.call 'readability.parse', link, (err, postData) =>
       Session.set('fetching', false)
+      postData.streamId = @_id
+      Posts.insert postData
 
-    Meteor.call('fetchLink', link, onFetched)
 
-    event.preventDefault()
+
+    
     return false
 
   'click .stream--download': ->

@@ -5,19 +5,9 @@
 # https://www.npmjs.org/package/oauth-1.0a
 
 OAuth = Meteor.require('oauth-1.0a')
+API_PATH = 'https://www.instapaper.com/api/1.1/'
 
-@setupInstapaper = ->
-  settings = JSON.parse(Assets.getText('instapaper.json')) # config lives here
-  I = new Instapaper(settings.consumer_key, settings.consumer_secret)
-  I.getToken(settings.username, settings.password)
-  Meteor.methods
-    'callInstapaper': (endpoint, data) ->
-      return I.call(endpoint, data)
-  return I
-
-class @Instapaper
-
-  @API_PATH: 'https://www.instapaper.com/api/1.1/'
+class InstapaperConnection
 
   constructor: (key, secret) ->
     @oauth = OAuth
@@ -29,7 +19,7 @@ class @Instapaper
   call: (endpoint, data, format) ->
     
     request = 
-      url: Instapaper.API_PATH + endpoint
+      url: API_PATH + endpoint
       method: 'POST'
       data: data
     
@@ -68,7 +58,13 @@ class @Instapaper
       public: response.oauth_token
       secret: response.oauth_token_secret
 
+# Instantiate it
 
+@Instapaper = new InstapaperConnection(TOKENS.instapaper.consumerKey, TOKENS.instapaper.consumerSecret)
+Instapaper.getToken(TOKENS.instapaper.username, TOKENS.instapaper.password)
 
+Meteor.methods
+  'instapaper.call': (endpoint, data) ->
+    return I.call(endpoint, data)
 
 

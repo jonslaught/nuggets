@@ -3,7 +3,13 @@
   <form class="stream--new input-group input-group-lg">
      <input type="text" class="stream--new--link form-control">
      <span class="input-group-btn">
-      <button class="btn btn-primary"><i class="fa fa-magic"></i></button>
+      <button class="btn btn-primary stream--new--button">
+      {{#if fetching}}
+        <i class="fa fa-spinner fa-spin"></i>
+      {{else}}
+        <i class="fa fa-magic"></i>
+      {{/if}}
+      </button>
     </span>
   </form>
 

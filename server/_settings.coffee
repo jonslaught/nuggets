@@ -1,0 +1,1 @@
+@TOKENS = JSON.parse(Assets.getText('tokens.json'))
