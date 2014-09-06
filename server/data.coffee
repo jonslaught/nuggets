@@ -3,14 +3,11 @@
 reset = ->
   Posts.remove({})
   Streams.remove({})
-  #Grafs.remove({})
 
 Meteor.startup ->
 
   reset()
   loadMockData()
-
-  
   loadInstapaperData()
 
 loadInstapaperData = ->
@@ -30,11 +27,24 @@ loadInstapaperData = ->
     postData =
       title: b.title
       link: b.url
+      author: b.url.match(/:\/\/(.[^/]+)/)?[1]
       date: new Date(b.time * 1000) # convert to milliseconds
       grafs: []
       streamId: stream._id
-
+      instapaper: b
     p = Posts.create postData
+
+
+  for h in highlights
+
+    post = Posts.findOne
+      'instapaper.bookmark_id': h.bookmark_id
+
+    grafData =
+      text: markdownify(h.text)
+      quote: true
+
+    post.addGraf(grafData)
 
 
 loadMockData = ->

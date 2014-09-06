@@ -14,8 +14,5 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe('streams')
 
-  this.route 'highlights',
-    path: '/highlights'
-
 Router.configure
   layoutTemplate: 'master'
