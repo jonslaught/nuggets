@@ -16,7 +16,7 @@ if Meteor.isClient
 
 if Meteor.isServer
 
-  html_md = Meteor.require('html-md')
+  html_md = Meteor.npmRequire('html-md')
   @markdownify = (html) ->
     md = html_md(html, {inline: true})
     md.replace(/<(?:.|\n)*?>/gm, '')

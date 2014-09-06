@@ -4,7 +4,7 @@
 # https://github.com/meteor/meteor/tree/devel/packages/oauth
 # https://www.npmjs.org/package/oauth-1.0a
 
-OAuth = Meteor.require('oauth-1.0a')
+OAuth = Meteor.npmRequire('oauth-1.0a')
 API_PATH = 'https://www.instapaper.com/api/1.1/'
 
 class InstapaperConnection
