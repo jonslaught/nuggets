@@ -6,10 +6,14 @@
 
 OAuth = Meteor.require('oauth-1.0a')
 
-Meteor.startup ->
+@setupInstapaper = ->
   settings = JSON.parse(Assets.getText('instapaper.json')) # config lives here
   I = new Instapaper(settings.consumer_key, settings.consumer_secret)
   I.getToken(settings.username, settings.password)
+  Meteor.methods
+    'callInstapaper': (endpoint, data) ->
+      return I.call(endpoint, data)
+  return I
 
 class @Instapaper
 
@@ -22,19 +26,35 @@ class @Instapaper
         secret: secret
         signature_method: 'HMAC-SHA1'
 
-  call: (endpoint, data) ->
+  call: (endpoint, data, format) ->
+    
     request = 
       url: Instapaper.API_PATH + endpoint
       method: 'POST'
       data: data
     
-    headers = @oauth.toHeader(@oauth.authorize(request))
-    
+    if @token?
+      headers = @oauth.toHeader(@oauth.authorize(request, @token))
+    else
+      headers = @oauth.toHeader(@oauth.authorize(request))
+
+
     response = HTTP.post request.url, 
       params: request.data
       headers: headers
 
-    return response.content
+    content = response.content
+    if format == 'qline'
+      return JSON.parse('{"' + decodeURI(content.replace(/&/g, "\",\"").replace(/\=/g,"\":\"")) + '"}')
+    else if format == 'html'
+      return content
+    else
+      return JSON.parse(response.content)
+
+
+  getUser: ->
+    response = @call('account/verify_credentials')
+    return response
 
   getToken: (username, password) ->
 
@@ -42,11 +62,11 @@ class @Instapaper
       x_auth_username: username
       x_auth_password: password
       x_auth_mode: 'client_auth'
-    })   
+    }, 'qline')   
     
-    parsed = JSON.parse('{"' + decodeURI(response.replace(/&/g, "\",\"").replace(/\=/g,"\":\"")) + '"}')
-
-    return parsed
+    @token = 
+      public: response.oauth_token
+      secret: response.oauth_token_secret
 
 
 

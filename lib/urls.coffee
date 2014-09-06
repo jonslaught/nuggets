@@ -1,9 +1,11 @@
 Router.map ->
   
   this.route 'stream',
-    path: '/'
+    path: '/:slug'
     data: ->
-      s = Streams.findOne()
+      slug = @params.slug or 'mock'
+      s = Streams.findOne({'slug': slug})
+
       if s
         s.posts = Posts.find {streamId: s._id},
             sort:
@@ -12,13 +14,8 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe('streams')
 
-  this.route 'instapaper',
-    path: '/instapaper'
-    where: 'server'
-    action: ->
-      Instapaper.getToken()
-
-
+  this.route 'highlights',
+    path: '/highlights'
 
 Router.configure
   layoutTemplate: 'master'
