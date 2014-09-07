@@ -17,6 +17,7 @@ class ReadabilityConnection
         datePublished: data.date_published
         date: new Date()
         readability: data
+        content: markdownify(data.content)
 
     return postData
 

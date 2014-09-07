@@ -14,5 +14,13 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe('streams')
 
+
+  this.route 'reader',
+    path: '/reader/:_id'
+    data: ->
+      Posts.findOne @params._id
+    waitOn: ->
+      Meteor.subscribe('streams')
+
 Router.configure
   layoutTemplate: 'master'

@@ -17,7 +17,7 @@ if Meteor.isServer
 
   toMarkdown = Meteor.npmRequire('to-markdown').toMarkdown
   @markdownify = (html) ->
-    md = toMarkdown(html)
+    md = toMarkdown(html).trim()
     md.replace(/<(?:.|\n)*?>/gm, '')
 
 @postToMarkdown = (post) ->

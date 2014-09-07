@@ -17,8 +17,7 @@ mrt:jquery-ui@1.9.2
 mrt:jquery-ui-bootstrap@0.1.2
 iron:router
 meteorhacks:npm
-
-
 npm-container
 mizzao:bootstrap-3
+mrt:rangy
 

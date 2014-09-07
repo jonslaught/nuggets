@@ -57,6 +57,12 @@ class @Post extends Model
     _.remove @grafs, (graf) -> graf._id == id
     @save()
 
+  getContent: ->
+    if not @content?
+      Meteor.call 'readability.parse', @link, (err, response) =>
+        @content = response.content
+        @save()
+
 
 class @Graf
   constructor: (doc) ->
