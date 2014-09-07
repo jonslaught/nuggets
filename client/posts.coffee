@@ -3,11 +3,19 @@ Template.graf.rendered = ->
   if not @data.text
     @find('.graf--body .editable').focus()
 
-
+Template.post.rendered = ->
+  @$('.post--body').sortable
+    revert: true
+    cancel: '.editable'
 
 Template.post.events
   'click .post--adder': ->
     @addGraf()
+
+  'sortupdate .post--body': (event, template) ->
+    sortedIds = template.$('.post--body').sortable('toArray')
+    @grafs = _.map sortedIds, (id) => _.find(@grafs, {_id: id})
+    @save()
 
 Template.graf.events
 
