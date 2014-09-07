@@ -13,12 +13,11 @@ if Meteor.isClient
     html = showdown.makeHtml(md)
     return html
     
-
 if Meteor.isServer
 
-  html_md = Meteor.npmRequire('html-md')
+  toMarkdown = Meteor.npmRequire('to-markdown').toMarkdown
   @markdownify = (html) ->
-    md = html_md(html, {inline: true})
+    md = toMarkdown(html)
     md.replace(/<(?:.|\n)*?>/gm, '')
 
 @postToMarkdown = (post) ->
@@ -43,5 +42,4 @@ source:
       md += "\n\n" + graf.text
 
   return md
-
 
